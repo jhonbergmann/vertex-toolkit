@@ -84,4 +84,4 @@ MIT © [Vertex Team](https://github.com/jhonbergmann) - see the [LICENSE](LICENS
 
 ---
 
-**[📖 Full Documentation](docs/README.md)** | **[🚀 Getting Started](docs/GETTING_STARTED.md)** | **[💡 Examples](docs/EXAMPLES.md)** | **[📝 Changelog](CHANGELOG.md)**
+**[📖 Full Documentation](docs/README.md)** | **[🚀 Getting Started](docs/GETTING_STARTED.md)** | **[💡 Examples](docs/EXAMPLES.md)** | **[📝 Changelog](CHANGELOG.md)** | **[📦 Publishing Guide](scripts/PUBLISHING.md)**
