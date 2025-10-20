@@ -76,7 +76,19 @@ utils.generateUUID(); // UUID v4
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please see our [contribution guidelines](CONTRIBUTING.md).
+Contributions are welcome! We use GitHub Actions for automated CI/CD. Simply fork, make your changes, and create a PR. Our automated workflows will handle testing and validation.
+
+See our [contribution guidelines](CONTRIBUTING.md) for more details.
+
+## � Automated CI/CD
+
+This project uses **GitHub Actions** for:
+- ✅ Automated testing on multiple Node.js versions
+- 🔒 Security audits and dependency updates  
+- 📦 Automatic NPM publishing on version tags
+- 🏷️ GitHub releases with auto-generated changelogs
+
+**For Maintainers**: Use [GitHub Actions workflow](https://github.com/jhonbergmann/vertex-toolkit/actions/workflows/version.yml) to create new releases with a single click!
 
 ## 📄 License
 
@@ -84,4 +96,4 @@ MIT © [Vertex Team](https://github.com/jhonbergmann) - see the [LICENSE](LICENS
 
 ---
 
-**[📖 Full Documentation](docs/README.md)** | **[🚀 Getting Started](docs/GETTING_STARTED.md)** | **[💡 Examples](docs/EXAMPLES.md)** | **[📝 Changelog](CHANGELOG.md)** | **[📦 Publishing Guide](scripts/PUBLISHING.md)**
+**[📖 Full Documentation](docs/README.md)** | **[🚀 Getting Started](docs/GETTING_STARTED.md)** | **[💡 Examples](docs/EXAMPLES.md)** | **[📝 Changelog](CHANGELOG.md)** | **[� CI/CD Guide](.github/README.md)**
