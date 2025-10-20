@@ -169,7 +169,7 @@ npm run dev
 ### Via Code:
 
 - **Workflows**: Modify `.github/workflows/`
-- **Templates**: Customize `.github/ISSUE_TEMPLATE/`
+- **Templates**: Customize `.github/issue_template/`
 - **Dependabot**: Configure `.github/dependabot.yml`
 
 ## 🚨 Troubleshooting
