@@ -1,0 +1,105 @@
+name: Feature Request
+description: Suggest a new feature or enhancement for Vertex Toolkit
+title: "[Feature] "
+labels: ["enhancement", "needs-triage"]
+assignees:
+  - jhonbergmann
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please fill out the form below to help us understand your request.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Feature Summary
+      description: A brief description of the feature you'd like to see added.
+      placeholder: Add a new validation function for Brazilian RG documents...
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve? What's the use case?
+      placeholder: |
+        Currently, there's no way to validate Brazilian RG documents. This would be useful for Brazilian applications that need to validate identity documents...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How do you envision this feature working?
+      placeholder: |
+        Add a new function `validations.isValidRG(rg: string): boolean` that:
+        - Validates the format (XX.XXX.XXX-X)
+        - Checks the state-specific patterns
+        - Returns true/false for validity
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: Which category does this feature belong to?
+      options:
+        - Validations
+        - Masks
+        - Formatters
+        - Utilities
+        - Generators
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: api
+    attributes:
+      label: Proposed API
+      description: What would the API look like? (function signatures, usage examples)
+      render: typescript
+      placeholder: |
+        // Validation
+        validations.isValidRG('12.345.678-9'): boolean
+        
+        // Mask
+        masks.applyRGMask('123456789'): string // '12.345.678-9'
+        
+        // Usage
+        const isValid = validations.isValidRG('12.345.678-9');
+        const formatted = masks.applyRGMask('123456789');
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What other approaches have you considered?
+      placeholder: |
+        - Using a third-party library (but adds dependency)
+        - Manual regex validation (but less reliable)
+        - Creating a custom function (but not reusable)
+
+  - type: checkboxes
+    id: implementation
+    attributes:
+      label: Implementation Willingness
+      description: Are you willing to help implement this feature?
+      options:
+        - label: I can help implement this feature
+        - label: I can help with testing
+        - label: I can help with documentation
+        - label: I can provide examples/use cases
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other information that might be helpful
+      placeholder: Links to specifications, examples from other libraries, etc.

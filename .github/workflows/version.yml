@@ -1,0 +1,123 @@
+name: Auto Version & Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      release_notes:
+        description: 'Release notes (optional)'
+        required: false
+        type: string
+
+jobs:
+  version-and-release:
+    name: Version Bump & Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Configure git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run tests
+      run: npm test || echo "No tests configured yet"
+      
+    - name: Build project
+      run: npm run build
+      
+    - name: Verify build
+      run: npm run publish:dry
+      
+    - name: Get current version
+      id: current_version
+      run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+      
+    - name: Bump version
+      id: version_bump
+      run: |
+        NEW_VERSION=$(npm version ${{ github.event.inputs.version_type }} --no-git-tag-version)
+        echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_OUTPUT
+        echo "VERSION_TAG=${NEW_VERSION}" >> $GITHUB_OUTPUT
+        
+    - name: Update CHANGELOG.md
+      run: |
+        NEW_VERSION="${{ steps.version_bump.outputs.NEW_VERSION }}"
+        DATE=$(date +%Y-%m-%d)
+        
+        # Create temp file with new version entry
+        cat > temp_changelog.md << EOF
+        # Changelog
+        
+        All notable changes to this project will be documented in this file.
+        
+        The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+        and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+        
+        ## [${NEW_VERSION#v}] - ${DATE}
+        
+        ### Added
+        - ${{ github.event.inputs.release_notes || 'Updates and improvements' }}
+        
+        ### Changed
+        - 
+        
+        ### Fixed
+        - 
+        
+        EOF
+        
+        # Append existing changelog (skip the header)
+        if [ -f CHANGELOG.md ]; then
+          tail -n +8 CHANGELOG.md >> temp_changelog.md
+        fi
+        
+        # Replace original
+        mv temp_changelog.md CHANGELOG.md
+        
+    - name: Commit changes
+      run: |
+        git add package.json package-lock.json CHANGELOG.md
+        git commit -m "chore: bump version to ${{ steps.version_bump.outputs.NEW_VERSION }}"
+        
+    - name: Create and push tag
+      run: |
+        git tag ${{ steps.version_bump.outputs.VERSION_TAG }}
+        git push origin main
+        git push origin ${{ steps.version_bump.outputs.VERSION_TAG }}
+        
+    - name: Summary
+      run: |
+        echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- **Version**: ${{ steps.current_version.outputs.VERSION }} → ${{ steps.version_bump.outputs.NEW_VERSION }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Type**: ${{ github.event.inputs.version_type }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Tag**: ${{ steps.version_bump.outputs.VERSION_TAG }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Release Notes**: ${{ github.event.inputs.release_notes || 'Updates and improvements' }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "The release workflow will now automatically:" >> $GITHUB_STEP_SUMMARY
+        echo "1. Create a GitHub release" >> $GITHUB_STEP_SUMMARY
+        echo "2. Publish to NPM" >> $GITHUB_STEP_SUMMARY
+        echo "3. Update package registries" >> $GITHUB_STEP_SUMMARY

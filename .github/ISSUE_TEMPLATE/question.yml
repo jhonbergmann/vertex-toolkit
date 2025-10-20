@@ -1,0 +1,64 @@
+name: Question
+description: Ask a question about using Vertex Toolkit
+title: "[Question] "
+labels: ["question", "needs-response"]
+assignees:
+  - jhonbergmann
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question about using Vertex Toolkit? We're here to help!
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: How do I validate multiple CPFs at once?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What are you trying to achieve? What have you tried so far?
+      placeholder: |
+        I'm building a form that accepts multiple CPF numbers and I need to validate them all. I tried using a loop but...
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Current Code (if applicable)
+      description: Share the code you're working with
+      render: typescript
+      placeholder: |
+        import { validations } from 'vertex-toolkit';
+        
+        const cpfs = ['123.456.789-09', '987.654.321-00'];
+        // How do I validate all of these?
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: What environment are you working in?
+      options:
+        - Browser
+        - Node.js
+        - React
+        - React Native
+        - Next.js
+        - Other
+        - Not applicable
+
+  - type: checkboxes
+    id: documentation
+    attributes:
+      label: Documentation Check
+      options:
+        - label: I have checked the [README](https://github.com/jhonbergmann/vertex-toolkit#readme)
+        - label: I have checked the [documentation](https://github.com/jhonbergmann/vertex-toolkit/tree/main/docs)
+        - label: I have checked the [examples](https://github.com/jhonbergmann/vertex-toolkit/blob/main/docs/EXAMPLES.md)

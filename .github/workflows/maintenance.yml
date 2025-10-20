@@ -1,0 +1,146 @@
+name: Maintenance
+
+on:
+  schedule:
+    # Run every Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  update-dependencies:
+    name: Update Dependencies
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Check for outdated packages
+      id: outdated
+      run: |
+        OUTDATED=$(npm outdated --json || echo '{}')
+        echo "OUTDATED=$OUTDATED" >> $GITHUB_OUTPUT
+        
+    - name: Create issue for outdated packages
+      if: steps.outdated.outputs.OUTDATED != '{}'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const outdated = JSON.parse('${{ steps.outdated.outputs.OUTDATED }}');
+          
+          if (Object.keys(outdated).length === 0) return;
+          
+          let body = `## 📦 Outdated Dependencies\n\n`;
+          body += `The following packages have updates available:\n\n`;
+          body += `| Package | Current | Wanted | Latest |\n`;
+          body += `|---------|---------|--------|---------|\n`;
+          
+          for (const [pkg, info] of Object.entries(outdated)) {
+            body += `| ${pkg} | ${info.current} | ${info.wanted} | ${info.latest} |\n`;
+          }
+          
+          body += `\n## 🔧 Actions Required\n\n`;
+          body += `1. Review the updates above\n`;
+          body += `2. Test compatibility with new versions\n`;
+          body += `3. Update dependencies: \`npm update\`\n`;
+          body += `4. Run tests to ensure everything works\n`;
+          body += `5. Create a PR with the updates\n\n`;
+          body += `*This issue was automatically created by the maintenance workflow.*`;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: '📦 Weekly Dependency Update Check',
+            body: body,
+            labels: ['maintenance', 'dependencies']
+          });
+
+  security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run security audit
+      id: audit
+      run: |
+        AUDIT_RESULT=$(npm audit --json || echo '{"vulnerabilities": {}}')
+        echo "AUDIT_RESULT=$AUDIT_RESULT" >> $GITHUB_OUTPUT
+        
+    - name: Check audit results
+      run: npm audit --audit-level moderate
+      
+    - name: Create security issue if vulnerabilities found
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const auditResult = JSON.parse('${{ steps.audit.outputs.AUDIT_RESULT }}');
+          
+          if (Object.keys(auditResult.vulnerabilities || {}).length === 0) return;
+          
+          let body = `## 🚨 Security Vulnerabilities Detected\n\n`;
+          body += `The security audit found vulnerabilities in dependencies:\n\n`;
+          
+          body += `\`\`\`json\n${JSON.stringify(auditResult, null, 2)}\`\`\`\n\n`;
+          
+          body += `## 🔧 Actions Required\n\n`;
+          body += `1. Review the vulnerabilities above\n`;
+          body += `2. Run \`npm audit fix\` to apply automatic fixes\n`;
+          body += `3. For manual fixes, update specific packages\n`;
+          body += `4. Test the application after fixes\n`;
+          body += `5. Create a security patch release if needed\n\n`;
+          body += `*This issue was automatically created by the security audit workflow.*`;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: '🚨 Security Vulnerabilities Detected',
+            body: body,
+            labels: ['security', 'bug', 'high-priority']
+          });
+
+  build-health-check:
+    name: Build Health Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build project
+      run: npm run build
+      
+    - name: Check build output
+      run: |
+        echo "## 🔍 Build Health Check" >> $GITHUB_STEP_SUMMARY
+        echo "- Build completed successfully ✅" >> $GITHUB_STEP_SUMMARY
+        echo "- Dist folder size: $(du -sh dist/ | cut -f1)" >> $GITHUB_STEP_SUMMARY
+        echo "- Total files: $(find dist/ -type f | wc -l)" >> $GITHUB_STEP_SUMMARY
+        echo "- TypeScript files compiled: $(find dist/ -name "*.d.ts" | wc -l)" >> $GITHUB_STEP_SUMMARY
