@@ -1,6 +1,6 @@
 {
   "name": "vertex-toolkit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A comprehensive toolkit with validations, masks, formatters and utilities for React, React Native and Next.js applications",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
@@ -11,13 +11,27 @@
     "LICENSE",
     "CONTRIBUTING.md",
     "CHANGELOG.md",
-    "docs"
+    "docs",
+    "scripts"
   ],
   "scripts": {
     "build": "tsc && tsc -p tsconfig.esm.json",
     "dev": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major",
+    "publish:patch": "node scripts/publish.js patch",
+    "publish:minor": "node scripts/publish.js minor",
+    "publish:major": "node scripts/publish.js major",
+    "publish:dry": "npm publish --dry-run",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "check": "node scripts/check.js",
+    "check:publish": "npm run build && npm run publish:dry",
+    "release": "node scripts/publish.js",
+    "release:win": "scripts\\publish.bat"
   },
   "keywords": [
     "validation",
@@ -39,6 +53,7 @@
   "author": "Vertex",
   "license": "MIT",
   "devDependencies": {
+    "rimraf": "^6.0.1",
     "typescript": "^5.9.3"
   }
 }
