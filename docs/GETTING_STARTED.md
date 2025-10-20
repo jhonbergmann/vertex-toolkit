@@ -63,13 +63,13 @@ src/
 ### 1. Installation
 
 ```bash
-npm install @vertex/toolkit
+npm install vertex-toolkit
 ```
 
 ### 2. Basic Usage
 
 ```typescript
-import { validations, masks, formatters } from '@vertex/toolkit';
+import { validations, masks, formatters } from 'vertex-toolkit';
 
 // Mask + validate input value
 const cpfValue = masks.applyCPFMask(userInput);
@@ -82,7 +82,7 @@ const slug = formatters.slugify('My Title!'); // 'my-title'
 ### 3. Advanced Example
 
 ```typescript
-import { validations, masks, formatters, utils } from '@vertex/toolkit';
+import { validations, masks, formatters, utils } from 'vertex-toolkit';
 
 // Create a complete user registration form
 function handleUserRegistration(formData) {
@@ -191,8 +191,8 @@ This toolkit can be used immediately in production applications and will serve a
 
 ## 🚀 Quick Start Checklist
 
-- [ ] Install: `npm install @vertex/toolkit`
-- [ ] Import: `import { validations, masks, formatters, utils } from '@vertex/toolkit'`
+- [ ] Install: `npm install vertex-toolkit`
+- [ ] Import: `import { validations, masks, formatters, utils } from 'vertex-toolkit'`
 - [ ] Test: Run basic validation and formatting functions
 - [ ] Integrate: Add to your forms and data processing
 - [ ] Explore: Check `EXAMPLES.md` for advanced usage patterns

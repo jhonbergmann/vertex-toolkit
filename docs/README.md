@@ -5,9 +5,9 @@ A comprehensive toolkit library with validations, masks, formatters and utilitie
 ## 🚀 Installation
 
 ```bash
-npm install @vertex/toolkit
+npm install vertex-toolkit
 # or
-yarn add @vertex/toolkit
+yarn add vertex-toolkit
 ```
 
 ## Highlights
@@ -25,7 +25,7 @@ yarn add @vertex/toolkit
 - **Strings**: Alpha, alphanumeric, JSON, Base64, etc.
 
 ```typescript
-import { validations } from '@vertex/toolkit';
+import { validations } from 'vertex-toolkit';
 
 // brazilian documents
 validations.isValidCPF('123.456.789-00');
@@ -53,7 +53,7 @@ validations.isValidPassword('MyPass@123', {
 Masks for data input formatting:
 
 ```typescript
-import { masks } from '@vertex/toolkit';
+import { masks } from 'vertex-toolkit';
 
 // documents
 masks.applyCPFMask('12345678900'); // '123.456.789-00'
@@ -82,7 +82,7 @@ masks.applyPercentageMask(15.5); // '15,50%'
 Advanced formatting for strings, numbers and dates:
 
 ```typescript
-import { formatters } from '@vertex/toolkit';
+import { formatters } from 'vertex-toolkit';
 
 // strings
 formatters.toCamelCase('my example string'); // 'myExampleString'
@@ -108,7 +108,7 @@ formatters.addTime(new Date(), 5, 'days'); // Date + 5 days
 Utility functions for arrays, objects, functions and more:
 
 ```typescript
-import { utils } from '@vertex/toolkit';
+import { utils } from 'vertex-toolkit';
 
 // arrays
 utils.unique([1, 2, 2, 3]); // [1, 2, 3]
@@ -141,7 +141,7 @@ const user = await utils.storage.get('user');
 Data generators for testing and development:
 
 ```typescript
-import { generators } from '@vertex/toolkit';
+import { generators } from 'vertex-toolkit';
 
 // valid documents
 generators.generateCPF(); // '12345678900'

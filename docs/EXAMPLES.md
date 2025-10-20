@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm install @vertex/toolkit
+npm install vertex-toolkit
 ```
 
 ## Validators
@@ -11,7 +11,7 @@ npm install @vertex/toolkit
 ### Brazilian Documents
 
 ```typescript
-import { validations } from '@vertex/toolkit';
+import { validations } from 'vertex-toolkit';
 
 // CPF
 console.log(validations.isValidCPF('123.456.789-09')); // true
@@ -89,7 +89,7 @@ console.log(validations.hasCommonPasswordPatterns('MyPass@123')); // false
 ### Documents
 
 ```typescript
-import { masks } from '@vertex/toolkit';
+import { masks } from 'vertex-toolkit';
 
 // CPF
 console.log(masks.applyCPFMask('12345678909')); // '123.456.789-09'
@@ -145,7 +145,7 @@ console.log(masks.applyPercentageMask(15.5)); // '15,50%'
 ### Strings
 
 ```typescript
-import { formatters } from '@vertex/toolkit';
+import { formatters } from 'vertex-toolkit';
 
 const text = 'my example string';
 
@@ -208,7 +208,7 @@ console.log(formatters.getDateDifference(now, future, 'days')); // 5
 ### Arrays
 
 ```typescript
-import { utils } from '@vertex/toolkit';
+import { utils } from 'vertex-toolkit';
 
 const numbers = [1, 2, 2, 3, 3, 3, 4, 5];
 const users = [
@@ -352,7 +352,7 @@ await customStorage.set('session', { token: 'abc123' });
 
 ```typescript
 import React from 'react';
-import { react, masks } from '@vertex/toolkit';
+import { react, masks } from 'vertex-toolkit';
 
 function CPFInput() {
   const cpf = react.useMask('', masks.applyCPFMask);
@@ -418,7 +418,7 @@ function SignupForm() {
 ### Test Data
 
 ```typescript
-import { generators } from '@vertex/toolkit';
+import { generators } from 'vertex-toolkit';
 
 // Valid documents
 console.log(generators.generateCPF()); // '12345678909'
@@ -470,7 +470,7 @@ import {
   formatters, 
   utils, 
   react 
-} from '@vertex/toolkit';
+} from 'vertex-toolkit';
 
 function CheckoutForm() {
   // Personal data validation hook
