@@ -80,7 +80,7 @@ Contributions are welcome! We use GitHub Actions for automated CI/CD. Simply for
 
 See our [contribution guidelines](CONTRIBUTING.md) for more details.
 
-## � Automated CI/CD
+## 🔄 Automated CI/CD
 
 This project uses **GitHub Actions** for:
 - ✅ Automated testing on multiple Node.js versions

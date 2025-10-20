@@ -1,215 +1,215 @@
 # 🚀 GitHub Actions CI/CD Setup
 
-O Vertex Toolkit agora utiliza **GitHub Actions** para automação completa de CI/CD, proporcionando um processo de desenvolvimento mais profissional e seguro.
+Vertex Toolkit now uses **GitHub Actions** for complete CI/CD automation, providing a more professional and secure development process.
 
-## 🔄 Workflows Configurados
+## 🔄 Configured Workflows
 
 ### 1. **CI Pipeline** (`.github/workflows/ci.yml`)
-**Executa em**: Todos os pushes e PRs para `main`
+**Runs on**: All pushes and PRs to `main`
 
-- ✅ **Testes em múltiplas versões** do Node.js (16, 18, 20)
-- ✅ **Build do projeto** e verificação de tipos
-- ✅ **Auditoria de segurança** automática
-- ✅ **Lint e formatação** (quando configurado)
-- ✅ **Upload de artifacts** da build
+- ✅ **Multi-version testing** with Node.js (16, 18, 20)
+- ✅ **Project build** and type checking
+- ✅ **Automated security audit**
+- ✅ **Lint and formatting** (when configured)
+- ✅ **Build artifacts upload**
 
 ### 2. **Release & Publish** (`.github/workflows/release.yml`)
-**Executa em**: Tags de versão (ex: `v1.0.5`)
+**Runs on**: Version tags (e.g., `v1.0.5`)
 
-- 🏷️ **Cria release automático** no GitHub
-- 📦 **Publica no NPM** automaticamente
-- 📝 **Extrai changelog** da versão
-- 🔗 **Gera links** e informações da release
+- 🏷️ **Creates automatic release** on GitHub
+- 📦 **Publishes to NPM** automatically
+- 📝 **Extracts changelog** from version
+- 🔗 **Generates links** and release information
 
 ### 3. **Auto Version** (`.github/workflows/version.yml`)
-**Executa em**: Manualmente via GitHub UI
+**Runs on**: Manually via GitHub UI
 
-- 🎯 **Interface amigável** para escolher tipo de versão
-- 📊 **Bump automático** de versão (patch/minor/major)
-- 📝 **Atualiza CHANGELOG.md** automaticamente
-- 🏷️ **Cria tag** e dispara o workflow de release
+- 🎯 **User-friendly interface** to choose version type
+- 📊 **Automatic version bump** (patch/minor/major)
+- 📝 **Updates CHANGELOG.md** automatically
+- 🏷️ **Creates tag** and triggers release workflow
 
 ### 4. **Maintenance** (`.github/workflows/maintenance.yml`)
-**Executa em**: Semanalmente (segundas-feiras)
+**Runs on**: Weekly (Mondays)
 
-- 🔍 **Verifica dependências** desatualizadas
-- 🛡️ **Auditoria de segurança** automática
-- 📋 **Cria issues** para manutenção necessária
-- 🏥 **Health check** da build
+- 🔍 **Checks outdated dependencies**
+- 🛡️ **Automated security audit**
+- 📋 **Creates issues** for necessary maintenance
+- 🏥 **Build health check**
 
 ### 5. **Dependabot** (`.github/dependabot.yml`)
-**Executa em**: Semanalmente
+**Runs on**: Weekly
 
-- 🔄 **Atualiza dependências** automaticamente
-- 🔧 **Atualiza GitHub Actions** para versões mais recentes
-- 📬 **Cria PRs** organizados e rotulados
+- 🔄 **Updates dependencies** automatically
+- 🔧 **Updates GitHub Actions** to newer versions
+- 📬 **Creates organized** and labeled PRs
 
-## 🎯 Como Usar o Novo Sistema
+## 🎯 How to Use the New System
 
-### Para Desenvolver:
+### For Development:
 
 ```bash
-# Desenvolvimento local (como sempre)
+# Local development (as always)
 npm run dev          # Watch mode
-npm run build        # Build local
-npm run check        # Verificar se está pronto
+npm run build        # Local build
+npm run check        # Verify if ready
 ```
 
-### Para Publicar uma Nova Versão:
+### To Publish a New Version:
 
-#### Método 1: Via GitHub UI (Recomendado) 🌟
+#### Method 1: Via GitHub UI (Recommended) 🌟
 
-1. **Acesse**: [Actions > Auto Version & Release](https://github.com/jhonbergmann/vertex-toolkit/actions/workflows/version.yml)
-2. **Clique**: "Run workflow"
-3. **Escolha**:
+1. **Access**: [Actions > Auto Version & Release](https://github.com/jhonbergmann/vertex-toolkit/actions/workflows/version.yml)
+2. **Click**: "Run workflow"
+3. **Choose**:
    - **Version type**: `patch` (bugfix), `minor` (features), `major` (breaking)
-   - **Release notes**: Descreva as mudanças (opcional)
-4. **Execute**: O workflow vai:
-   - ✅ Fazer bump da versão
-   - ✅ Atualizar CHANGELOG.md
-   - ✅ Criar commit e tag
-   - ✅ Disparar publicação automática
+   - **Release notes**: Describe the changes (optional)
+4. **Execute**: The workflow will:
+   - ✅ Bump the version
+   - ✅ Update CHANGELOG.md
+   - ✅ Create commit and tag
+   - ✅ Trigger automatic publication
 
-#### Método 2: Via Git Tags (Tradicional)
+#### Method 2: Via Git Tags (Traditional)
 
 ```bash
-# Commit suas mudanças
+# Commit your changes
 git add .
-git commit -m "feat: adicionar nova funcionalidade"
+git commit -m "feat: add new functionality"
 
-# Criar tag de versão
+# Create version tag
 git tag v1.0.5
 git push origin main --tags
 
-# O GitHub Actions automaticamente:
-# 1. Criará release no GitHub
-# 2. Publicará no NPM
-# 3. Enviará notificações
+# GitHub Actions will automatically:
+# 1. Create release on GitHub
+# 2. Publish to NPM
+# 3. Send notifications
 ```
 
-### Para Contribuir:
+### To Contribute:
 
-1. **Fork** e clone o repositório
-2. **Crie branch**: `git checkout -b feature/minha-feature`
-3. **Faça as mudanças** e commit
-4. **Push**: `git push origin feature/minha-feature`
-5. **Abra PR**: Use o template automático
-6. **CI roda automaticamente** ✅
-7. **Após aprovação**: Merge automático
+1. **Fork** and clone the repository
+2. **Create branch**: `git checkout -b feature/my-feature`
+3. **Make changes** and commit
+4. **Push**: `git push origin feature/my-feature`
+5. **Open PR**: Use the automatic template
+6. **CI runs automatically** ✅
+7. **After approval**: Automatic merge
 
-## 🔧 Configuração Necessária
+## 🔧 Required Configuration
 
-### Secrets do GitHub (Para Maintainers)
+### GitHub Secrets (For Maintainers)
 
 ```bash
-# 1. Gerar token do NPM
+# 1. Generate NPM token
 npm login
 npm token create --read-only=false
 
-# 2. Adicionar secret no GitHub:
+# 2. Add secret on GitHub:
 # Settings > Secrets and variables > Actions > New repository secret
 # Name: NPM_TOKEN
-# Value: [seu-token-npm]
+# Value: [your-npm-token]
 ```
 
-### Configuração Local (Para Desenvolvimento)
+### Local Configuration (For Development)
 
 ```bash
-# Clone o repositório
+# Clone the repository
 git clone https://github.com/jhonbergmann/vertex-toolkit.git
 cd vertex-toolkit
 
-# Instale dependências
+# Install dependencies
 npm install
 
-# Configure git (se necessário)
-git config user.name "Seu Nome"
-git config user.email "seu.email@example.com"
+# Configure git (if necessary)
+git config user.name "Your Name"
+git config user.email "your.email@example.com"
 
-# Desenvolvimento
+# Development
 npm run dev
 ```
 
-## 📊 Vantagens do Novo Sistema
+## 📊 Advantages of the New System
 
-### ✅ **Automação Completa**
-- Zero intervenção manual para releases
-- Processo consistente e confiável
-- Reduz erros humanos
+### ✅ **Complete Automation**
+- Zero manual intervention for releases
+- Consistent and reliable process
+- Reduces human errors
 
-### ✅ **Qualidade Garantida**
-- Testes automáticos em múltiplas versões
-- Verificação de tipos TypeScript
-- Auditoria de segurança contínua
+### ✅ **Guaranteed Quality**
+- Automatic tests on multiple versions
+- TypeScript type checking
+- Continuous security auditing
 
-### ✅ **Manutenção Proativa**
-- Dependências sempre atualizadas
-- Issues automáticos para manutenção
-- Monitoramento de vulnerabilidades
+### ✅ **Proactive Maintenance**
+- Dependencies always updated
+- Automatic issues for maintenance
+- Vulnerability monitoring
 
-### ✅ **Experiência Profissional**
-- Releases bem documentados
-- Changelog automático
-- Templates para issues e PRs
+### ✅ **Professional Experience**
+- Well-documented releases
+- Automatic changelog
+- Templates for issues and PRs
 
-### ✅ **Transparência Total**
-- Todos os processos visíveis no GitHub
-- Histórico completo de builds
-- Status claro de cada etapa
+### ✅ **Complete Transparency**
+- All processes visible on GitHub
+- Complete build history
+- Clear status of each step
 
-## 🎛️ Controles Disponíveis
+## 🎛️ Available Controls
 
 ### Via GitHub Interface:
 
-- **Manual Release**: Crie releases quando quiser
-- **Dependabot**: Configure frequência de updates
-- **Branch Protection**: Configure regras de merge
-- **Required Reviews**: Configure aprovações obrigatórias
+- **Manual Release**: Create releases whenever you want
+- **Dependabot**: Configure update frequency
+- **Branch Protection**: Configure merge rules
+- **Required Reviews**: Configure mandatory approvals
 
-### Via Código:
+### Via Code:
 
-- **Workflows**: Modifique `.github/workflows/`
+- **Workflows**: Modify `.github/workflows/`
 - **Templates**: Customize `.github/ISSUE_TEMPLATE/`
 - **Dependabot**: Configure `.github/dependabot.yml`
 
 ## 🚨 Troubleshooting
 
 ### Build Failing?
-1. Check o log no Actions tab
-2. Rode `npm run check` localmente
-3. Verifique se tipos TypeScript estão corretos
+1. Check the log in the Actions tab
+2. Run `npm run check` locally
+3. Verify TypeScript types are correct
 
 ### NPM Publish Failing?
-1. Verifique se `NPM_TOKEN` está configurado
-2. Confirme se versão não existe ainda
-3. Check se build está gerando arquivos corretos
+1. Check if `NPM_TOKEN` is configured
+2. Confirm if version doesn't exist yet
+3. Check if build is generating correct files
 
-### Workflow Não Executando?
-1. Verifique se está na branch `main`
-2. Confirme se tag tem formato correto (`v1.0.0`)
-3. Check permissões do repositório
+### Workflow Not Running?
+1. Check if you're on the `main` branch
+2. Confirm tag has correct format (`v1.0.0`)
+3. Check repository permissions
 
-## 📈 Próximos Passos
+## 📈 Next Steps
 
-### Melhorias Futuras:
-- [ ] **Testes unitários** (Jest/Vitest)
+### Future Improvements:
+- [ ] **Unit testing** (Jest/Vitest)
 - [ ] **ESLint + Prettier** configuration
 - [ ] **Codecov** integration
 - [ ] **Performance benchmarks**
-- [ ] **E2E testing** em diferentes ambientes
+- [ ] **E2E testing** in different environments
 - [ ] **Automated changelog** generation
 - [ ] **Slack/Discord** notifications
 
 ---
 
-## 🎉 Resultado
+## 🎉 Result
 
-Agora você tem um sistema de CI/CD **enterprise-grade** que:
+Now you have an **enterprise-grade** CI/CD system that:
 
-1. **🔄 Automatiza todo o processo** de desenvolvimento → produção
-2. **🛡️ Garante qualidade** com testes e validações
-3. **📦 Simplifica releases** com interface amigável
-4. **🔧 Mantém dependências** sempre atualizadas
-5. **📊 Fornece visibilidade** total do processo
+1. **🔄 Automates the entire process** from development → production
+2. **🛡️ Ensures quality** with tests and validations
+3. **📦 Simplifies releases** with user-friendly interface
+4. **🔧 Keeps dependencies** always updated
+5. **📊 Provides complete visibility** of the process
 
-**Para publicar uma nova versão agora**: Apenas vá em Actions → Auto Version & Release → Run workflow! 🚀
+**To publish a new version now**: Just go to Actions → Auto Version & Release → Run workflow! 🚀

@@ -128,9 +128,9 @@ export function generatePerson() {
  * generates company data
  */
 export function generateCompany() {
-  const companyTypes = ['Ltda', 'S/A', 'EIRELI', 'MEI'];
-  const businessAreas = ['Tecnologia', 'Comércio', 'Serviços', 'Indústria', 'Consultoria'];
-  const companyNames = ['Inovação', 'Soluções', 'Sistemas', 'Digital', 'Tech', 'Pro', 'Plus', 'Max'];
+  const companyTypes = ['Ltd', 'Inc', 'LLC', 'Corp'];
+  const businessAreas = ['Technology', 'Commerce', 'Services', 'Industry', 'Consulting'];
+  const companyNames = ['Innovation', 'Solutions', 'Systems', 'Digital', 'Tech', 'Pro', 'Plus', 'Max'];
   
   const name = companyNames[Math.floor(Math.random() * companyNames.length)];
   const area = businessAreas[Math.floor(Math.random() * businessAreas.length)];

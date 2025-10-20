@@ -1,6 +1,6 @@
 {
   "name": "vertex-toolkit",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "A comprehensive toolkit with validations, masks, formatters and utilities for React, React Native and Next.js applications",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
@@ -11,8 +11,7 @@
     "LICENSE",
     "CONTRIBUTING.md",
     "CHANGELOG.md",
-    "docs",
-    "scripts"
+    "docs"
   ],
   "scripts": {
     "build": "tsc && tsc -p tsconfig.esm.json",

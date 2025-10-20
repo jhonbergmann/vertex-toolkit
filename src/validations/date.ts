@@ -32,7 +32,7 @@ export function isValidDate(date: string | Date): boolean {
  * @example
  * ```typescript
  * isValidDateBR('25/12/2023'); // true
- * isValidDateBR('31/02/2023'); // false (invalid day for february)
+ * isValidDateBR('31/02/2023'); // false (invalid day for February)
  * isValidDateBR('12/25/2023'); // false (wrong format)
  * isValidDateBR('25-12-2023'); // false (wrong separator)
  * ```
@@ -64,7 +64,7 @@ export function isValidDateBR(date: string): boolean {
  * @example
  * ```typescript
  * isValidDateUS('12/25/2023'); // true
- * isValidDateUS('02/31/2023'); // false (invalid day for february)
+ * isValidDateUS('02/31/2023'); // false (invalid day for February)
  * isValidDateUS('25/12/2023'); // false (wrong format)
  * isValidDateUS('12-25-2023'); // false (wrong separator)
  * ```
