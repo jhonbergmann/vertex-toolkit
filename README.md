@@ -5,11 +5,11 @@ A comprehensive TypeScript toolkit with validations, masks, formatters and utili
 ## 🚀 Quick Start
 
 ```bash
-npm install @vertex/toolkit
+npm install vertex-toolkit
 ```
 
 ```typescript
-import { validations, masks, formatters, utils } from '@vertex/toolkit';
+import { validations, masks, formatters, utils } from 'vertex-toolkit';
 
 // Validate and format Brazilian documents
 const cpf = masks.applyCPFMask('12345678909'); // '123.456.789-09'
@@ -80,8 +80,8 @@ Contributions are welcome! Please see our [contribution guidelines](CONTRIBUTING
 
 ## 📄 License
 
-MIT © [Vertex Team](https://github.com/jhonbergmann)
+MIT © [Vertex Team](https://github.com/jhonbergmann) - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-**[📖 Full Documentation](docs/README.md)** | **[🚀 Getting Started](docs/GETTING_STARTED.md)** | **[💡 Examples](docs/EXAMPLES.md)**
+**[📖 Full Documentation](docs/README.md)** | **[🚀 Getting Started](docs/GETTING_STARTED.md)** | **[💡 Examples](docs/EXAMPLES.md)** | **[📝 Changelog](CHANGELOG.md)**
