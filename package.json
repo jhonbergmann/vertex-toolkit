@@ -1,6 +1,6 @@
 {
   "name": "vertex-toolkit",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A comprehensive toolkit with validations, masks, formatters and utilities for React, React Native and Next.js applications",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
